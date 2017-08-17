@@ -35,7 +35,7 @@ public class Test0 extends SimpleApplication {
     
     @Override
     public void simpleInitApp() {
-        guiAppState = new GuiAppState(guiNode);
+        guiAppState = new GuiAppState(guiNode, "base");
         
         stateManager.attach(guiAppState);
     }

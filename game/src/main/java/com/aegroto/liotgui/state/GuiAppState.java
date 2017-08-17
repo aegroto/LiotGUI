@@ -5,12 +5,12 @@
  */
 package com.aegroto.liotgui.state;
 
-import com.aegroto.liotgui.GUIImage;
+import com.aegroto.liotgui.GUIClickable;
 import com.aegroto.liotgui.GUINode;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
-import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,8 +20,13 @@ public class GuiAppState extends BaseAppState {
     private final Node guiNode;
     private GUINode anchorNode;
     
-    public GuiAppState(Node guiNode) {
+    private ArrayList<GUIClickable> clickableList;
+    
+    private String skin;
+    
+    public GuiAppState(Node guiNode, String skin) {
         this.guiNode = guiNode;
+        this.skin = skin;
     }
     
     @Override
@@ -29,6 +34,7 @@ public class GuiAppState extends BaseAppState {
         System.out.println("Hello World!");
         
         anchorNode = new GUINode(this);
+        clickableList = new ArrayList<>();
     }
 
     @Override
@@ -49,9 +55,22 @@ public class GuiAppState extends BaseAppState {
     
     public void attachNode(GUINode node) {
         anchorNode.attachChild(node);
+        
+        if(node instanceof GUIClickable)
+            clickableList.add((GUIClickable) node);
     }
     
     public void detachNode(GUINode node) {
         anchorNode.detachChild(node);
+        if(node instanceof GUIClickable)
+            clickableList.remove((GUIClickable) node);
+    }
+    
+    public void setSkin(String skin) {
+        this.skin = skin;
+    }
+    
+    public String getSkin() {
+        return skin;
     }
 }

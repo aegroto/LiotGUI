@@ -1,14 +1,12 @@
-MaterialDef Sprite  {
-
+MaterialDef Image  {
     MaterialParameters {
-		Texture2D Texture
-		// Float PI : 3.1415926535897932384626433832795
-		Float RotationAngle : 0.0
+        Texture2D Texture
+        Float RotationAngle : 0.0
     }
 
     Technique {
-        VertexShader GLSL100:   materials/Sprite/shader.vert
-        FragmentShader GLSL100: materials/Sprite/shader.frag
+        VertexShader GLSL100:   liotgui/base/materials/Image/shader.vert
+        FragmentShader GLSL100: liotgui/base/materials/Image/shader.frag
         WorldParameters {
             // ...
             WorldViewProjectionMatrix
