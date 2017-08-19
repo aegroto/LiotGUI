@@ -5,11 +5,24 @@
  */
 package com.aegroto.liotgui;
 
+import com.aegroto.liotgui.state.GuiAppState;
+import com.jme3.math.Vector2f;
+
 /**
  *
  * @author lorenzo
  */
-public interface GUIClickable {        
+public abstract class GUIClickable extends GUINode {    
+    protected Vector2f activeArea;
+
+    public GUIClickable(GuiAppState guiAppState) {
+        super(guiAppState);
+    }
+    
+    public Vector2f getActiveArea() {
+        return activeArea;
+    }
+    
     public abstract void onClick();
     public abstract void onContinuedClick();
     public abstract void onLeft();

@@ -6,6 +6,7 @@
 package com.aegroto.liotgui.test;
 
 import com.aegroto.liotgui.GUINode;
+import com.aegroto.liotgui.common.Coordinate2D;
 import com.aegroto.liotgui.state.GuiAppState;
 import com.aegroto.liotgui.test.menu.TestMenu0;
 import com.jme3.app.SimpleApplication;
@@ -31,17 +32,22 @@ public class Test0 extends SimpleApplication {
     private GUINode 
             menu0;
     
-    private boolean init = true;
+    private boolean init = false;
     
     @Override
     public void simpleInitApp() {
+        Coordinate2D.init(settings);
+        flyCam.setEnabled(false);
+        
         guiAppState = new GuiAppState(guiNode, "base");
         
         stateManager.attach(guiAppState);
+        
+        init = true;
     }
     
     @Override
-    public void simpleRender(RenderManager rm) {        
+    public void simpleUpdate(float tpf) {
         if(init) {
             if(guiAppState.isInitialized()) {
                 menu0 = new TestMenu0(guiAppState);
@@ -50,6 +56,11 @@ public class Test0 extends SimpleApplication {
                 init = false;
             }
         }
+    }
+    
+    @Override
+    public void simpleRender(RenderManager rm) {        
+
     }
     
 }
