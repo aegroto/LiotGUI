@@ -27,6 +27,9 @@ public abstract class GUIButton extends GUIClickable {
     protected abstract void execFunction();
     
     @Override
+    public void onHover() { }
+    
+    @Override
     public void onClick() {}
 
     @Override

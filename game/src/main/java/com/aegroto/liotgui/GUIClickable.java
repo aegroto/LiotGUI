@@ -23,6 +23,7 @@ public abstract class GUIClickable extends GUINode {
         return activeArea;
     }
     
+    public abstract void onHover();
     public abstract void onClick();
     public abstract void onContinuedClick();
     public abstract void onLeft();

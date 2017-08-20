@@ -14,6 +14,7 @@ import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.MouseButtonTrigger;
+import com.jme3.input.controls.MouseAxisTrigger;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -44,8 +45,12 @@ public class GuiAppState extends BaseAppState implements AnalogListener, ActionL
         clickableList = new ArrayList<>();
         
         getApplication().getInputManager().addMapping("Clicked", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
+        getApplication().getInputManager().addMapping("MouseMoving", 
+            new MouseAxisTrigger(MouseInput.AXIS_X, false), new MouseAxisTrigger(MouseInput.AXIS_X, true),
+            new MouseAxisTrigger(MouseInput.AXIS_Y, false), new MouseAxisTrigger(MouseInput.AXIS_Y, true));
         
-        getApplication().getInputManager().addListener(this, "Clicked");
+        getApplication().getInputManager().addListener(this,
+            "Clicked", "MouseMoving");
     }
 
     @Override
@@ -112,17 +117,21 @@ public class GuiAppState extends BaseAppState implements AnalogListener, ActionL
     public void update(float tpf) { }
 
     @Override
-    public void onAnalog(String name, float f, float f1) {
-        if(name.equals("Clicked")) {
-            Vector2f mousePos = getApplication().getInputManager().getCursorPosition();
-            
-            for(GUIClickable clickable: clickableList) {
-                Vector2f clickablePos = new Vector2f(clickable.getWorldTranslation().x, clickable.getWorldTranslation().y);
-                if(Helpers.pointInArea(mousePos,
-                        clickablePos,
-                        clickablePos.add(clickable.getActiveArea()))) {
+    public void onAnalog(String name, float f, float f1) {        
+        Vector2f mousePos = getApplication().getInputManager().getCursorPosition();
+        
+        for(GUIClickable clickable: clickableList) {
+            Vector2f clickablePos = new Vector2f(clickable.getWorldTranslation().x, clickable.getWorldTranslation().y);
+            if(Helpers.pointInArea(mousePos,
+                    clickablePos,
+                    clickablePos.add(clickable.getActiveArea()))) {
+                    switch(name) {
+                        case "Clicked":
                             clickable.onContinuedClick();
-                }
+                            break;
+                        case "MouseMoving":
+                            clickable.onHover();
+                    }
             }
         }
     }
