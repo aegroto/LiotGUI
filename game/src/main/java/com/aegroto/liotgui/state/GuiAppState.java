@@ -10,6 +10,7 @@ import com.aegroto.liotgui.GUINode;
 import com.aegroto.liotgui.common.Helpers;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
+import com.jme3.font.BitmapFont;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.AnalogListener;
@@ -26,21 +27,22 @@ import java.util.ArrayList;
  */
 public class GuiAppState extends BaseAppState implements AnalogListener, ActionListener {
     private final Node guiNode;
+    private final BitmapFont guiFont;
+    
     private GUINode anchorNode;
     
     private ArrayList<GUIClickable> clickableList;
     
     private String skin;
     
-    public GuiAppState(Node guiNode, String skin) {
+    public GuiAppState(Node guiNode, BitmapFont guiFont, String skin) {
         this.guiNode = guiNode;
+        this.guiFont = guiFont;
         this.skin = skin;
     }
     
     @Override
-    protected void initialize(Application aplctn) {
-        System.out.println("Hello World!");
-        
+    protected void initialize(Application aplctn) {        
         anchorNode = new GUINode(this);
         clickableList = new ArrayList<>();
         
@@ -59,8 +61,6 @@ public class GuiAppState extends BaseAppState implements AnalogListener, ActionL
 
     @Override
     protected void onEnable() {
-        System.out.println("GuiAppState enabled!");
-        
         guiNode.attachChild(anchorNode);
     }
 
@@ -111,6 +111,10 @@ public class GuiAppState extends BaseAppState implements AnalogListener, ActionL
     
     public String getSkin() {
         return skin;
+    }
+    
+    public BitmapFont getGuiFont() {
+        return guiFont;
     }
     
     @Override

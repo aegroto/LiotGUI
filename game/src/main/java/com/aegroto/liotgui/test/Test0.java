@@ -38,8 +38,10 @@ public class Test0 extends SimpleApplication {
     public void simpleInitApp() {
         Coordinate2D.init(settings);
         flyCam.setEnabled(false);
+        setDisplayStatView(false);
+        setDisplayFps(false);
         
-        guiAppState = new GuiAppState(guiNode, "base");
+        guiAppState = new GuiAppState(guiNode, guiFont, "base");
         
         stateManager.attach(guiAppState);
         
