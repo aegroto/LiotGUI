@@ -6,7 +6,6 @@
 package com.aegroto.liotgui;
 
 import com.aegroto.liotgui.state.GuiAppState;
-import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.font.Rectangle;
 

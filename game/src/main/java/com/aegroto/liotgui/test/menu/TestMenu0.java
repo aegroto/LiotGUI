@@ -5,13 +5,13 @@
  */
 package com.aegroto.liotgui.test.menu;
 
-import com.aegroto.liotgui.GUIButton;
+import com.aegroto.liotgui.clickable.GUIButton;
 import com.aegroto.liotgui.GUIImage;
 import com.aegroto.liotgui.GUINode;
 import com.aegroto.liotgui.GUIText;
 import com.aegroto.liotgui.common.Coordinate2D;
 import com.aegroto.liotgui.state.GuiAppState;
-import com.jme3.font.BitmapFont;
+import com.aegroto.liotgui.typable.GUITextBar;
 import com.jme3.math.Vector2f;
 
 /**
@@ -22,6 +22,7 @@ public class TestMenu0 extends GUINode {
     protected GUIImage image;
     protected GUIButton button;    
     protected GUIText text;
+    protected GUITextBar textBar;
     
     public TestMenu0(GuiAppState guiAppState) {
         super(guiAppState);
@@ -39,12 +40,16 @@ public class TestMenu0 extends GUINode {
         text = new GUIText("Sample Text", guiAppState);
         // text.getBitmapText().setAlignment(BitmapFont.Align.Center);
         
+        textBar = new GUITextBar(new Coordinate2D(.3f, .125f).toVector(), guiAppState);
+        
         // attachChild(image);
-        attachChild(button);
+        // attachChild(button);
         // attachChild(text);
+        attachChild(textBar);
         
         // image.setLocalTranslation(500, 400, 0);
-        button.setLocalTranslation(250, 100, 0);
+        // button.setLocalTranslation(250, 100, 0);
         // text.setLocalTranslation(0, 0, 0);
+        textBar.setLocalTranslation(200, 300, 0);
     }
 }

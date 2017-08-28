@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.aegroto.liotgui;
+package com.aegroto.liotgui.clickable;
 
-import com.aegroto.liotgui.common.Coordinate2D;
+import com.aegroto.liotgui.GUIImage;
+import com.aegroto.liotgui.GUIText;
 import com.aegroto.liotgui.state.GuiAppState;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.Rectangle;
@@ -19,9 +20,8 @@ public abstract class GUIButton extends GUIClickable {
     protected GUIImage image;
     protected GUIText text;
     
-    public GUIButton(String buttonText, Vector2f area, GuiAppState guiAppState) {
-        super(guiAppState);
-        activeArea = area;
+    public GUIButton(String buttonText, Vector2f activeArea, GuiAppState guiAppState) {
+        super(guiAppState, activeArea);
         
         image = new GUIImage(activeArea, "liotgui/"+guiAppState.getSkin()+"/textures/button.png", guiAppState);
         
@@ -39,6 +39,10 @@ public abstract class GUIButton extends GUIClickable {
         text.getBitmapText().setBox(new Rectangle(0, activeArea.y / 2 - text.getBitmapText().getLineHeight() / 2,
             activeArea.x, 0));
         text.getBitmapText().setAlignment(BitmapFont.Align.Center);
+    }
+    
+    public GUIText getText() {
+        return text;
     }
     
     protected abstract void execFunction();
