@@ -1,0 +1,24 @@
+MaterialDef Image  {
+    MaterialParameters {
+        Texture2D Texture
+        Float RotationAngle : 0.0
+    }
+
+    Technique {
+        VertexShader GLSL100:   liotgui/base/materials/Image/shader.vert
+        FragmentShader GLSL100: liotgui/base/materials/Image/shader.frag
+        WorldParameters {
+            // ...
+            WorldViewProjectionMatrix
+            NormalMatrix
+            WorldViewMatrix
+            ViewMatrix
+            CameraPosition
+            WorldMatrix
+            // ...
+        }
+        Defines {
+
+        }
+    }
+}
