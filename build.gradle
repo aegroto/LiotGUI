@@ -57,7 +57,7 @@ def jmerepo='com.github.jMonkeyEngine.jmonkeyengine'
 def jmeversion='3.1-github-tag-test'
 
 dependencies {
-    compile (project(":game")) {
+    compile (project(":liotgui")) {
         exclude module: "jme3-lwjgl"
         exclude module: "jme3-desktop"
     }
