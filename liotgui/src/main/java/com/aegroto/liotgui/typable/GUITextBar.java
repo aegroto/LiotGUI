@@ -12,6 +12,7 @@ import com.aegroto.liotgui.state.GuiAppState;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.Rectangle;
 import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
 
 /**
  *
@@ -69,6 +70,10 @@ public class GUITextBar extends GUIClickable implements GUITypable {
         text.getBitmapText().setBox(new Rectangle(0, activeArea.y / 2 - text.getBitmapText().getLineHeight() / 2,
             activeArea.x, 0));
         text.getBitmapText().setAlignment(BitmapFont.Align.Left);
+    }
+    
+    public void setGraphicalTextOffset(Vector3f offset) {
+        text.setLocalTranslation(offset);
     }
     
     public String getText() {

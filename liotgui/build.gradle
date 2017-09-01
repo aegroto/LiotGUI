@@ -13,14 +13,14 @@ ext.mainClass = 'com.aegroto.liotgui.test.Test0'
 
 repositories {
     mavenCentral()
-    maven { url "https://jitpack.io" }
 }
 
+def jme3 = [v:'3.1.0-stable', g:'org.jmonkeyengine']
+
 dependencies {
-    compile jmerepo + ':jme3-core:' + jmeversion
-    compile jmerepo + ':jme3-desktop:' + jmeversion
-    compile jmerepo + ':jme3-lwjgl:' + jmeversion
-    compile jmerepo + ':jme3-android:' + jmeversion
+    compile "${jme3.g}:jme3-core:${jme3.v}"
+    compile "${jme3.g}:jme3-android:${jme3.v}"
+    compile "${jme3.g}:jme3-android-native:${jme3.v}"
     
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }

@@ -50,19 +50,19 @@ public class GuiAppState extends BaseAppState {
     }
     
     @Override
-    protected void initialize(Application aplctn) {        
+    protected void initialize(Application application) {
         anchorNode = new GUINode(this);
         clickableList = new ArrayList<>();
-        
+
         registerKeyboardInput();
-        
+
         getApplication().getInputManager().addMapping("Click", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
-        getApplication().getInputManager().addMapping("MouseMoving", 
-            new MouseAxisTrigger(MouseInput.AXIS_X, false), new MouseAxisTrigger(MouseInput.AXIS_X, true),
-            new MouseAxisTrigger(MouseInput.AXIS_Y, false), new MouseAxisTrigger(MouseInput.AXIS_Y, true));
-        
+        getApplication().getInputManager().addMapping("MouseMoving",
+                new MouseAxisTrigger(MouseInput.AXIS_X, false), new MouseAxisTrigger(MouseInput.AXIS_X, true),
+                new MouseAxisTrigger(MouseInput.AXIS_Y, false), new MouseAxisTrigger(MouseInput.AXIS_Y, true));
+
         getApplication().getInputManager().addListener(actionListener,
-            "Click", "MouseMoving");
+                "Click", "MouseMoving");
     }
 
     @Override
@@ -77,6 +77,8 @@ public class GuiAppState extends BaseAppState {
     @Override
     protected void onDisable() {
         guiNode.detachChild(anchorNode);
+
+
     }
     
     private void registerKeyboardInput() {

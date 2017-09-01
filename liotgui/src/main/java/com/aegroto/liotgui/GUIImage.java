@@ -18,7 +18,7 @@ public class GUIImage extends GUINode {
         super(guiAppState);
         
         canvas = new Geometry("GUIImage canvas", new Quad(size.x, size.y));
-        
+
         material = new Material(this.guiAppState.getApplication().getAssetManager(),
                 "liotgui/"+guiAppState.getSkin()+"/materials/Image/Image.j3md");
             
