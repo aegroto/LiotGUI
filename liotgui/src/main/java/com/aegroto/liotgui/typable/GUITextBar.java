@@ -28,7 +28,7 @@ public class GUITextBar extends GUIClickable implements GUITypable {
     private GUIText text;
     
     public GUITextBar(Vector2f activeArea, String initialText, int textMaxLength, GuiAppState guiAppState) {
-        super(guiAppState, activeArea);
+        super(activeArea, guiAppState);
         
         textStr = initialText;
         this.textMaxLength = textMaxLength;

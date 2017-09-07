@@ -21,7 +21,7 @@ public abstract class GUIButton extends GUIClickable {
     protected GUIText text;
     
     public GUIButton(String buttonText, Vector2f activeArea, GuiAppState guiAppState) {
-        super(guiAppState, activeArea);
+        super(activeArea, guiAppState);
         
         image = new GUIImage(activeArea, "liotgui/"+guiAppState.getSkin()+"/textures/button.png", guiAppState);
         
@@ -58,8 +58,7 @@ public abstract class GUIButton extends GUIClickable {
     public void onHover() { }
     
     @Override
-    public void onClick() {
-    }
+    public void onClick() { }
 
     @Override
     public void onContinuedClick() { }

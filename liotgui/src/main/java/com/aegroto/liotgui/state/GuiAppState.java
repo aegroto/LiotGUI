@@ -62,6 +62,8 @@ public class GuiAppState extends BaseAppState {
                 new MouseAxisTrigger(MouseInput.AXIS_Y, false), new MouseAxisTrigger(MouseInput.AXIS_Y, true));
 
         getApplication().getInputManager().addListener(actionListener,
+                "Click");
+        getApplication().getInputManager().addListener(analogListener,
                 "Click", "MouseMoving");
     }
 
@@ -148,7 +150,6 @@ public class GuiAppState extends BaseAppState {
         inputManager.addMapping("LeftShift", new KeyTrigger(KeyInput.KEY_LSHIFT));
 
         inputManager.addListener(actionListener, "Delete");
-        inputManager.addListener(analogListener, "LeftShift");
     }    
     
     protected void searchAndAttachClickables(GUINode node) {
@@ -219,19 +220,26 @@ public class GuiAppState extends BaseAppState {
                 capital = true;
             } else {
                 capital = false;
+                GUIClickable activeClickable = null;
                 for(GUIClickable clickable: clickableList) {
                     Vector2f clickablePos = new Vector2f(clickable.getWorldTranslation().x, clickable.getWorldTranslation().y);
                     if(Helpers.pointInArea(mousePos,
                             clickablePos,
                             clickablePos.add(clickable.getActiveArea()))) {
-                            switch(name) {
-                                case "Click":
-                                    clickable.onContinuedClick();
-                                    break;
-                                case "MouseMoving":
-                                    clickable.onHover();
-                                    break;
-                            }
+                            if(activeClickable == null ||
+                              (activeClickable != null && clickable.getLocalTranslation().z > activeClickable.getLocalTranslation().z))
+                                activeClickable = clickable;
+                    }
+                }
+
+                if(activeClickable != null) {
+                    switch (name) {
+                        case "Click":
+                            activeClickable.onContinuedClick();
+                            break;
+                        case "MouseMoving":
+                            activeClickable.onHover();
+                            break;
                     }
                 }
             }

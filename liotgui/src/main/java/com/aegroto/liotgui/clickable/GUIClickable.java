@@ -16,7 +16,7 @@ import com.jme3.math.Vector2f;
 public abstract class GUIClickable extends GUINode {    
     protected Vector2f activeArea;
 
-    public GUIClickable(GuiAppState guiAppState, Vector2f activeArea) {
+    public GUIClickable(Vector2f activeArea, GuiAppState guiAppState) {
         super(guiAppState);
         
         this.activeArea = activeArea;
