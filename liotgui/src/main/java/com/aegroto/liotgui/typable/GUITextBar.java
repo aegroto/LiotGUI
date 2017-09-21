@@ -13,6 +13,7 @@ import com.jme3.font.BitmapFont;
 import com.jme3.font.Rectangle;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.system.JmeSystem;
 
 /**
  *
@@ -90,9 +91,7 @@ public class GUITextBar extends GUIClickable implements GUITypable {
     public void onContinuedClick() { }
 
     @Override
-    public void onLeft() { 
-        guiAppState.setActiveTypable(this);
-    }
+    public void onLeft() { }
 
     @Override
     public void deleteLastChar() {
@@ -104,12 +103,14 @@ public class GUITextBar extends GUIClickable implements GUITypable {
     }
 
     @Override
-    public void onBecomeActive() {
+    public void onBecomeActive() {        
+        JmeSystem.showSoftKeyboard(true);
         setGraphicalText(textStr + KEY_PLACEHOLDER_CHAR);
     }
 
     @Override
-    public void onBecomeUnactive() {
+    public void onBecomeUnactive() {        
+        JmeSystem.showSoftKeyboard(false);
         setGraphicalText(textStr);
     }
 }

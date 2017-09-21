@@ -259,11 +259,7 @@ public class GuiAppState extends BaseAppState {
             } else {
                 switch(name) {
                     case "Click":
-                        GUITypable lastTypable = null;
-                        if(activeTypable != null) {
-                            lastTypable = activeTypable;
-                            activeTypable = null;
-                        }
+                        GUITypable newTypable = null;
 
                         Vector2f mousePos = getApplication().getInputManager().getCursorPosition();
 
@@ -277,14 +273,21 @@ public class GuiAppState extends BaseAppState {
                                     clickable.onClick();
                                 } else {
                                     clickable.onLeft();
+                                    
+                                    if(clickable instanceof GUITypable)
+                                        newTypable = (GUITypable) clickable;
                                 }
                             }
                         }
-                        
-                        if(activeTypable == null) {
-                            if(lastTypable != null)
-                                lastTypable.onBecomeUnactive();
+                                                
+                        if(!pressed) {
+                            if(activeTypable != null && newTypable != activeTypable) {
+                                activeTypable.onBecomeUnactive();
+                            }
+                            
+                            setActiveTypable(newTypable);
                         }
+                        
                         break;
                     case "Delete":
                         if(!pressed && activeTypable != null)
