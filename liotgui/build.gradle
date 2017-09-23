@@ -3,8 +3,6 @@ apply plugin: 'java'
 sourceCompatibility = '1.7'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-def jmerepo='com.github.jMonkeyEngine.jmonkeyengine'
-def jmeversion='3.1-github-tag-test'
 ext.mainClass = 'com.aegroto.liotgui.test.Test0'
 
 /*if (!hasProperty('mainClass')) {
@@ -13,14 +11,18 @@ ext.mainClass = 'com.aegroto.liotgui.test.Test0'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
-def jme3 = [v:'3.1.0-stable', g:'org.jmonkeyengine']
+def jme3 = [v:'-SNAPSHOT', g:'com.github.jMonkeyEngine.jmonkeyengine']
 
 dependencies {
     compile "${jme3.g}:jme3-core:${jme3.v}"
-    compile "${jme3.g}:jme3-android:${jme3.v}"
-    compile "${jme3.g}:jme3-android-native:${jme3.v}"
+    compile "${jme3.g}:jme3-desktop:${jme3.v}"
+    compile "${jme3.g}:jme3-lwjgl:${jme3.v}"
+    
+    // compile "${jme3.g}:jme3-android:${jme3.v}"
+    // compile "${jme3.g}:jme3-android-native:${jme3.v}"
     
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }
