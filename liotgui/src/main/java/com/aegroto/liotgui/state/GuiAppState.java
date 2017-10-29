@@ -24,6 +24,7 @@ import com.jme3.math.Vector2f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 /**
  *
@@ -235,10 +236,10 @@ public class GuiAppState extends BaseAppState {
                 if(activeClickable != null) {
                     switch (name) {
                         case "Click":
-                            activeClickable.onContinuedClick();
+                            activeClickable.onContinuedClick(mousePos);
                             break;
                         case "MouseMoving":
-                            activeClickable.onHover();
+                            activeClickable.onHover(mousePos);
                             break;
                     }
                 }
@@ -262,23 +263,25 @@ public class GuiAppState extends BaseAppState {
                         GUITypable newTypable = null;
 
                         Vector2f mousePos = getApplication().getInputManager().getCursorPosition();
+                        
+                        try {
+                            for(GUIClickable clickable: clickableList) {
+                                Vector2f clickablePos = new Vector2f(clickable.getWorldTranslation().x, clickable.getWorldTranslation().y);
 
-                        for(GUIClickable clickable: clickableList) {
-                            Vector2f clickablePos = new Vector2f(clickable.getWorldTranslation().x, clickable.getWorldTranslation().y);
-                            
-                            if(Helpers.pointInArea(mousePos,
-                                    clickablePos,
-                                    clickablePos.add(clickable.getActiveArea()))) {
-                                if(pressed) {
-                                    clickable.onClick();
-                                } else {
-                                    clickable.onLeft();
-                                    
-                                    if(clickable instanceof GUITypable)
-                                        newTypable = (GUITypable) clickable;
+                                if(Helpers.pointInArea(mousePos,
+                                        clickablePos,
+                                        clickablePos.add(clickable.getActiveArea()))) {
+                                    if(pressed) {
+                                        clickable.onClick(mousePos);
+                                    } else {
+                                        clickable.onLeft(mousePos);
+
+                                        if(clickable instanceof GUITypable)
+                                            newTypable = (GUITypable) clickable;
+                                    }
                                 }
                             }
-                        }
+                        } catch(ConcurrentModificationException e) { }
                                                 
                         if(!pressed) {
                             if(activeTypable != null && newTypable != activeTypable) {

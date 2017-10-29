@@ -55,16 +55,16 @@ public abstract class GUIButton extends GUIClickable {
     protected abstract void execFunction();
     
     @Override
-    public void onHover() { }
+    public void onHover(Vector2f mousePos) { }
     
     @Override
-    public void onClick() { }
+    public void onClick(Vector2f mousePos) { }
 
     @Override
-    public void onContinuedClick() { }
+    public void onContinuedClick(Vector2f mousePos) { }
 
     @Override
-    public void onLeft() {
+    public void onLeft(Vector2f mousePos) {
         execFunction();
     }    
 }
